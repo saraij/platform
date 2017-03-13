@@ -22,7 +22,17 @@ public final class BallotBox
 	
 	public void addBallot(Ballot ballot)
 	{
-		map.put(ballot.getVoterIdentifier(), ballot);
+		if (!map.containsKey(ballot.getVoterIdentifier()))
+		{
+			map.put(ballot.getVoterIdentifier(), ballot);
+		}
+		else
+		{
+			for (Candidate candidate : ballot.getNominations())
+			{
+				map.get(ballot.getVoterIdentifier()).nominate(candidate);
+			}
+		}
 	}
 	
 	public Map<String,Integer> declareResult()
